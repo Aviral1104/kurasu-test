@@ -1,0 +1,234 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { padding: 1rem 0; font-family: var(--font-sans); }
+.section { margin-bottom: 1.5rem; }
+.sec-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 14px; }
+.card-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; display: flex; align-items: center; gap-8px; justify-content: space-between; }
+.card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 10px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.t-purple { background: #EEEDFE; color: #3C3489; }
+.t-amber { background: #FAEEDA; color: #633806; }
+.t-teal { background: #E1F5EE; color: #0F6E56; }
+.t-blue { background: #E6F1FB; color: #0C447C; }
+.t-coral { background: #FAECE7; color: #712B13; }
+.t-green { background: #EAF3DE; color: #3B6D11; }
+.items { list-style: none; padding: 0; }
+.items li { font-size: 12px; color: var(--color-text-secondary); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.items li:last-child { border-bottom: none; }
+.bullet { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.code-block { background: var(--color-background-secondary); border-radius: 8px; padding: 10px 12px; font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); line-height: 1.7; margin-top: 8px; border: 0.5px solid var(--color-border-tertiary); white-space: pre-wrap; word-break: break-word; }
+.pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.color-dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.color-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; color: var(--color-text-secondary); }
+.color-row:last-child { border-bottom: none; }
+.avatar-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 8px; }
+.av { width: 100%; aspect-ratio: 1; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+</style>
+
+<h2 class="sr-only">Kurasu upgrade plan — Solo Leveling features, animations, fonts, avatars and blog import</h2>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="sec-label">Solo Leveling UI features to add</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-title">System awakening screen <span class="tag t-purple">Onboarding</span></div>
+      <p class="card-desc">First-time users get a dramatic full-screen black overlay — white text types out "You have been selected by the System." Then their stats appear one by one. Sets the tone immediately.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#7c3aed;"></span>Typewriter animation on first login</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>"A new Hunter has awakened" message</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Rank assigned: E-Rank by default</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Fade into dashboard after 3 seconds</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Rank-up ceremony <span class="tag t-amber">Animation</span></div>
+      <p class="card-desc">When a user finishes a course (clears a dungeon), trigger a full-screen "Arise" moment — dark overlay, rank badge scales up, purple particle burst, sound optional.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#f59e0b;"></span>Black overlay fades in on course complete</li>
+        <li><span class="bullet" style="background:#f59e0b;"></span>Old rank fades out, new rank scales in</li>
+        <li><span class="bullet" style="background:#f59e0b;"></span>Particle effect (CSS only, no library)</li>
+        <li><span class="bullet" style="background:#f59e0b;"></span>"You have leveled up, Hunter" text</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Stat screen panel <span class="tag t-teal">Feature</span></div>
+      <p class="card-desc">A dedicated page styled like the Solo Leveling stat window — glass-panel aesthetic, all stats listed like RPG attributes: INT (quizzes), PER (streak), STR (videos watched).</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#0f6e56;"></span>INT = quiz accuracy score</li>
+        <li><span class="bullet" style="background:#0f6e56;"></span>PER = streak consistency</li>
+        <li><span class="bullet" style="background:#0f6e56;"></span>STR = total videos completed</li>
+        <li><span class="bullet" style="background:#0f6e56;"></span>AGI = avg time to complete a course</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Daily quest reset animation <span class="tag t-amber">Animation</span></div>
+      <p class="card-desc">At midnight, quests reset with a brief flash — "New quests have been issued by the System." Completed quests get a strikethrough with a green glow before disappearing.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#f59e0b;"></span>Completed quest: green glow + strikethrough</li>
+        <li><span class="bullet" style="background:#f59e0b;"></span>Midnight: "System Notice" banner slides in</li>
+        <li><span class="bullet" style="background:#f59e0b;"></span>New quests fade in one by one</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Shadow collection (flashcards) <span class="tag t-purple">Feature</span></div>
+      <p class="card-desc">Rename the flashcard section to "Shadow Army." Each completed video drops a Shadow card — styled like a collectible, with the topic name and XP value shown.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#7c3aed;"></span>Shadow cards stack in a collection view</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Rare shadows for hard topics (S-Rank material)</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>"Review your shadows" = flashcard session</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Gate scanner (link import) <span class="tag t-blue">Feature</span></div>
+      <p class="card-desc">Replace "New Gate" button with a scanner animation — user pastes a URL, a purple scanning line sweeps across it, then the Gate (course) materializes with rank assigned by AI based on content difficulty.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#185fa5;"></span>Scanning animation on URL paste</li>
+        <li><span class="bullet" style="background:#185fa5;"></span>AI assigns rank based on length + complexity</li>
+        <li><span class="bullet" style="background:#185fa5;"></span>"Gate identified: A-Rank Dungeon detected"</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Blog / website course import — how to handle it</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-title">Single-topic blog import <span class="tag t-teal">GeeksForGeeks, MDN, etc.</span></div>
+      <p class="card-desc">User pastes one article URL. You scrape the content, AI generates a summary, key points, and a 3-question quiz. That article becomes one "chapter" in a dungeon.</p>
+      <div class="code-block">Flow:
+1. Paste URL → scrape with Cheerio (Node)
+2. Strip HTML → clean text
+3. Send to Gemini: summarize + quiz
+4. Save as single-chapter course
+5. User can add more chapters manually</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Multi-article series import <span class="tag t-teal">Blog series</span></div>
+      <p class="card-desc">For sites like GFG where topics have sub-pages, let the user paste a "topic root" URL (e.g. GFG's linked list page). App crawls linked sub-articles in the same topic and builds a full dungeon automatically.</p>
+      <div class="code-block">Flow:
+1. Paste topic root URL
+2. Crawl same-domain links (max 20)
+3. Filter by topic relevance (AI)
+4. Order by reading sequence
+5. Build multi-chapter dungeon</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Font recommendations — epic but professional</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-title">Recommended font stack</div>
+      <p class="card-desc">You want that Solo Leveling feel — sharp, geometric, slightly futuristic — without looking like a game title screen.</p>
+      <div class="color-row"><strong style="font-size:13px;color:var(--color-text-primary);">Headings</strong><span>Outfit (Google Fonts) — geometric, clean, premium feel</span></div>
+      <div class="color-row"><strong style="font-size:13px;color:var(--color-text-primary);">Body</strong><span>Inter — the standard for serious apps, readable at any size</span></div>
+      <div class="color-row"><strong style="font-size:13px;color:var(--color-text-primary);">Rank badges / XP</strong><span>Space Grotesk — techy, sharp, perfect for numbers</span></div>
+      <div class="color-row"><strong style="font-size:13px;color:var(--color-text-primary);">System messages</strong><span>Syne — slightly unusual, feels like the System speaking</span></div>
+      <div class="code-block">CSS:
+--font-heading: 'Outfit', sans-serif;
+--font-body: 'Inter', sans-serif;
+--font-rank: 'Space Grotesk', sans-serif;
+--font-system: 'Syne', sans-serif;</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Typography rules for the theme</div>
+      <p class="card-desc">Small typographic choices make it feel premium without being loud.</p>
+      <ul class="items">
+        <li><span class="bullet" style="background:#7c3aed;"></span>Rank badges: letter-spacing: 0.12em, all-caps, Space Grotesk</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>XP numbers: tabular-nums, Space Grotesk, no letter spacing</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>System messages: Syne, italic, slightly muted color</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Quest titles: Outfit medium weight, sentence case</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Course titles: Outfit semibold, larger tracking</li>
+        <li><span class="bullet" style="background:#7c3aed;"></span>Body text: Inter regular, 14–15px, generous line-height</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Colour themes — let users pick their vibe</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-title">Shadow Purple <span class="tag t-purple">Default · current</span></div>
+      <p class="card-desc">The one you have now. Dark navy base, purple accent. Faithful to the Solo Leveling manga palette.</p>
+      <div class="color-row"><span class="color-dot" style="background:#0a0a0f;border:1px solid #333;"></span><span>Background #0a0a0f</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#7c3aed;"></span><span>Accent #7c3aed (violet)</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#a78bfa;"></span><span>Highlight #a78bfa (lavender)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Monarch Blue <span class="tag t-blue">Ice / cold theme</span></div>
+      <p class="card-desc">Ice blue and silver — feels like the Frost Monarch arc. Clean, cold, elite.</p>
+      <div class="color-row"><span class="color-dot" style="background:#060c18;border:1px solid #333;"></span><span>Background #060c18</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#1d6fa5;"></span><span>Accent #1d6fa5 (ice blue)</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#7dd3fc;"></span><span>Highlight #7dd3fc (sky)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Flame Red <span class="tag t-coral">Beast Monarch theme</span></div>
+      <p class="card-desc">Deep dark with crimson and amber — aggressive, high-energy. For users who want to feel like they're grinding hard.</p>
+      <div class="color-row"><span class="color-dot" style="background:#0f0505;border:1px solid #333;"></span><span>Background #0f0505</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#dc2626;"></span><span>Accent #dc2626 (crimson)</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#f59e0b;"></span><span>Highlight #f59e0b (amber)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Void Black <span class="tag t-teal">Sung Jin-Woo endgame</span></div>
+      <p class="card-desc">Pure black base, barely-there dark teal accent. The most minimal, premium feel — like late-game Jin-Woo energy.</p>
+      <div class="color-row"><span class="color-dot" style="background:#050505;border:1px solid #333;"></span><span>Background #050505</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#0d9488;"></span><span>Accent #0d9488 (dark teal)</span></div>
+      <div class="color-row"><span class="color-dot" style="background:#5eead4;"></span><span>Highlight #5eead4 (teal glow)</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">Hunter avatar system — select or upload</div>
+  <div class="card" style="max-width:100%;">
+    <p class="card-desc" style="margin-bottom:12px;">Give users 12 default Hunter avatars — each one a different rank aesthetic. They can also upload their own. Avatars show on the public profile and in the top-right corner.</p>
+    <div class="avatar-grid">
+      <div class="av" style="background:#1a0a2e;border-color:#7c3aed;">⚔️</div>
+      <div class="av" style="background:#0a1a2e;border-color:#1d6fa5;">🧊</div>
+      <div class="av" style="background:#2e0a0a;border-color:#dc2626;">🔥</div>
+      <div class="av" style="background:#0a2e1a;border-color:#059669;">🌿</div>
+      <div class="av" style="background:#1a1a0a;border-color:#d97706;">⚡</div>
+      <div class="av" style="background:#2e0a2e;border-color:#db2777;">🌑</div>
+      <div class="av" style="background:#0a0a0a;border-color:#6b7280;">💀</div>
+      <div class="av" style="background:#0d1a2e;border-color:#6366f1;">🛡️</div>
+      <div class="av" style="background:#2e1a0a;border-color:#92400e;">🗡️</div>
+      <div class="av" style="background:#0a2e2e;border-color:#0d9488;">🌊</div>
+      <div class="av" style="background:#1a2e0a;border-color:#16a34a;">🦅</div>
+      <div class="av" style="background:#2e2e0a;border-color:#ca8a04;">👁️</div>
+    </div>
+    <ul class="items" style="margin-top:12px;">
+      <li><span class="bullet" style="background:#7c3aed;"></span>Each avatar has a name (e.g. "Shadow Monarch", "Frost Mage", "Flame Berserker")</li>
+      <li><span class="bullet" style="background:#7c3aed;"></span>Some avatars locked until user reaches a certain rank</li>
+      <li><span class="bullet" style="background:#7c3aed;"></span>Upload custom image — crop to circle, save to Supabase storage (free tier)</li>
+      <li><span class="bullet" style="background:#7c3aed;"></span>Avatar border color changes with rank (E = gray, S = glowing purple)</li>
+    </ul>
+  </div>
+</div>
+
+</div>

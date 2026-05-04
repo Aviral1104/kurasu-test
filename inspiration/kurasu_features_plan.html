@@ -1,0 +1,547 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrap {
+    padding: 1rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .sec-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6b6880;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid #2a2a40;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: #0d0d18;
+    border: 0.5px solid #2a2a40;
+    border-radius: 12px;
+    padding: 1.4rem;
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent, #7c3aed);
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8e6f0;
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: #9d9ab0;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .items {
+    list-style: none;
+  }
+
+  .items li {
+    font-size: 13px;
+    color: #9d9ab0;
+    padding: 6px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    border-bottom: 0.5px solid #1a1a2e;
+  }
+
+  .items li:last-child {
+    border-bottom: none;
+  }
+
+  .bullet {
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin: 4px 4px 4px 0;
+  }
+
+  .t-p {
+    background: rgba(124, 58, 237, 0.1);
+    color: #a78bfa;
+    border: 0.5px solid rgba(124, 58, 237, 0.3);
+  }
+
+  .t-g {
+    background: rgba(52, 211, 153, 0.1);
+    color: #34d399;
+    border: 0.5px solid rgba(52, 211, 153, 0.3);
+  }
+
+  .t-t {
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+    border: 0.5px solid rgba(56, 189, 248, 0.3);
+  }
+
+  .t-a {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 0.5px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .code-block {
+    background: #06060e;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #b0adc8;
+    line-height: 1.8;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+
+  .highlight {
+    color: #a78bfa;
+  }
+
+  .demo-box {
+    background: #13131f;
+    border: 1px solid #2a2a40;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+
+  .arrow {
+    color: #7c3aed;
+    font-weight: 600;
+    margin: 0 8px;
+  }
+
+  .workflow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+
+  .wf-step {
+    font-size: 12px;
+    padding: 5px 10px;
+    background: rgba(124, 58, 237, 0.08);
+    border-radius: 4px;
+    border-left: 2px solid #7c3aed;
+    color: #a78bfa;
+  }
+
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .feature-left {}
+
+  .feature-right {}
+
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .comp-item {
+    padding: 10px 12px;
+    background: #13131f;
+    border-left: 3px solid #7c3aed;
+    font-size: 13px;
+    color: #9d9ab0;
+  }
+
+  .comp-item.bad {
+    border-left-color: #dc2626;
+  }
+
+  .comp-item.good {
+    border-left-color: #34d399;
+  }
+
+  .mt1 {
+    margin-top: 1rem;
+  }
+
+  .mb1 {
+    margin-bottom: 1rem;
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">Kurasu feature expansion — notes, AI summaries, scheduling</h2>
+
+  <!-- NOTES SECTION -->
+  <div class="section">
+    <div class="sec-label">Feature 1: Notes System — Per-Video Smart Notes</div>
+    <div class="grid">
+      <div class="card" style="--accent: #7c3aed;">
+        <div class="card-title">What it does</div>
+        <p class="card-desc">Every video gets its own notes panel. User can type manually OR AI can auto-generate a
+          summary from the YouTube transcript. Notes are saved to Firestore per video_id, tagged with timestamps for
+          easy reference.</p>
+        <div class="tag t-p">Core feature</div>
+        <div class="tag t-a">Uses YouTube captions API</div>
+      </div>
+
+      <div class="card" style="--accent: #34d399;">
+        <div class="card-title">How to build it</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #34d399;"></span>When user clicks "take notes" on a video → modal
+            pops up</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Textarea for manual notes + "AI Summary" button
+          </li>
+          <li><span class="bullet" style="background: #34d399;"></span>Button triggers: fetch YouTube captions → send to
+            Gemini → populate textarea</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Save to Firestore:
+            /users/{uid}/courses/{courseId}/videos/{videoId}/notes</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #38bdf8;">
+        <div class="card-title">Tech stack</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>Frontend:</strong> React modal component
+            with textarea</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>API route:</strong> /api/generateNotes
+            (Node.js)</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>YouTube captions:</strong>
+            youtube-captions-scraper npm package (free, no API key needed)</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>AI:</strong> Gemini API (free tier, ~$0
+            cost at scale)</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>Database:</strong> Firestore</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #f59e0b;">
+        <div class="card-title">Database schema</div>
+        <div class="code-block">
+          /users/{uid}/courses/{courseId}/videos/{videoId}/notes {
+          content: string // manual notes or AI summary
+          aiGenerated: boolean // true if from Gemini
+          transcript: string // cached YouTube transcript
+          keyPoints: string[] // 5 bullet points from AI
+          createdAt: timestamp
+          updatedAt: timestamp
+          }</div>
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-left">
+        <p style="font-size: 14px; color: #9d9ab0; margin-bottom: 10px;"><strong>User flow:</strong></p>
+        <div class="workflow">
+          <div class="wf-step">Open video</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">Click "notes"</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">See textarea</div>
+        </div>
+        <div class="workflow">
+          <div class="wf-step">Click "AI summary"</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">Fetch transcript</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">Call Gemini</div>
+        </div>
+        <div class="workflow">
+          <div class="wf-step">Gemini returns summary</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">Save to Firestore</div>
+          <span class="arrow">→</span>
+          <div class="wf-step">Show in UI</div>
+        </div>
+      </div>
+      <div class="feature-right">
+        <p style="font-size: 14px; color: #9d9ab0; margin-bottom: 10px;"><strong>Gemini prompt:</strong></p>
+        <div class="code-block">
+          Given this YouTube video transcript, create:
+          1. A 200-word summary
+          2. 5 key takeaways as bullet points
+          3. 3 review questions to test understanding
+
+          Transcript: {transcript}
+
+          Return as JSON:
+          { "summary": "...", "keyPoints": [...], "quiz": [...] }</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI SUMMARY FROM TRANSCRIPT -->
+  <div class="section">
+    <div class="sec-label">Feature 2: Auto-Generated AI Summary from YouTube Transcript</div>
+    <div class="grid">
+      <div class="card" style="--accent: #7c3aed;">
+        <div class="card-title">What's the problem?</div>
+        <p class="card-desc">When a user imports a YouTube playlist, they see 50 videos but have no idea what each one
+          covers. They have to click each one to read the description. Takes forever. Solution: show a 1-sentence AI
+          summary of each video before they even click.</p>
+        <div class="tag t-p">Huge UX win</div>
+      </div>
+
+      <div class="card" style="--accent: #34d399;">
+        <div class="card-title">Implementation</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #34d399;"></span>When course is imported, loop through all videos
+          </li>
+          <li><span class="bullet" style="background: #34d399;"></span>For each video: fetch caption → send first 200
+            words to Gemini</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Gemini: "Summarize in 1 sentence what this video
+            is about"</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Cache result per video_id in Firestore (never
+            re-call for same video)</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Display in course list: video title + AI summary
+            + metadata</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #38bdf8;">
+        <div class="card-title">Cost optimization</div>
+        <p class="card-desc" style="margin-bottom: 8px;"><strong>Key insight:</strong> Cache aggressively. If 100 users
+          import the same NeetCode playlist, you only call Gemini once for each video (not 100 times). Store summaries
+          under videos/{videoId} in a shared collection.</p>
+        <ul class="items">
+          <li><span class="bullet" style="background: #38bdf8;"></span>Shared cache saves 99% of API calls</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span>Cost per user → near $0</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span>Gemini free tier: ~1M tokens/day = 50,000+
+            summaries</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #f59e0b;">
+        <div class="card-title">UI mockup</div>
+        <div class="demo-box">
+          <div
+            style="font-family: 'Press Start 2P'; font-size: 9px; color: #a78bfa; letter-spacing: 2px; margin-bottom: 10px;">
+            VIDEO LIST IN COURSE</div>
+          <div style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #2a2a40;">
+            <div style="font-size: 13px; font-weight: 600; color: #e8e6f0;">1. Two Sum (Easy)</div>
+            <div style="font-size: 12px; color: #7c3aed; margin-top: 4px;">✨ AI: Given an array of integers, find two
+              numbers that add up to target</div>
+            <div style="font-size: 11px; color: #5a5870; margin-top: 3px;">15:42 · 1.2M views · ✓ watched</div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #e8e6f0;">2. Add Two Numbers (Medium)</div>
+            <div style="font-size: 12px; color: #7c3aed; margin-top: 4px;">✨ AI: Add two linked lists representing
+              numbers in reverse order</div>
+            <div style="font-size: 11px; color: #5a5870; margin-top: 3px;">18:20 · 2.1M views · next</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE MANAGEMENT -->
+  <div class="section">
+    <div class="sec-label">Feature 3: Notion-Like Schedule + Learning Plan</div>
+    <div class="grid">
+      <div class="card" style="--accent: #7c3aed;">
+        <div class="card-title">What it is</div>
+        <p class="card-desc">A calendar + task board view where users can plan their learning week. "I want to finish 5
+          videos by Friday" — system creates daily targets, shows progress, and sends reminders. Like Notion but
+          optimized for learning goals.</p>
+        <div class="tag t-p">Schedule management</div>
+        <div class="tag t-a">Week + day views</div>
+      </div>
+
+      <div class="card" style="--accent: #34d399;">
+        <div class="card-title">Core components</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Goal setter:</strong> "I want to complete
+            X course by DATE" → auto-generate daily breakdown</li>
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Calendar view:</strong> See what you
+            planned for each day of the week</li>
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Drag-and-drop:</strong> Move videos
+            between days, adjust schedule</li>
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Daily checklist:</strong> "Today: watch
+            videos 3–5 of System Design" with checkboxes</li>
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Progress tracking:</strong> Visual bar
+            showing course % done + time left</li>
+          <li><span class="bullet" style="background: #34d399;"></span><strong>Email reminders:</strong> "You planned 3
+            videos for today. You've done 1. 2 to go."</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #38bdf8;">
+        <div class="card-title">How it works — step by step</div>
+        <div style="font-size: 13px; color: #9d9ab0; line-height: 1.8;">
+          <p><strong>1. User sets goal:</strong> "Complete NeetCode 250 by June 30"</p>
+          <p style="margin-top: 6px;"><strong>2. System calculates:</strong> 250 videos ÷ 30 days = ~8 videos/day</p>
+          <p style="margin-top: 6px;"><strong>3. Creates schedule:</strong> Day 1: videos 1–8, Day 2: 9–16, etc.</p>
+          <p style="margin-top: 6px;"><strong>4. User can adjust:</strong> "Actually, I want to do 5/day instead"</p>
+          <p style="margin-top: 6px;"><strong>5. Calendar regenerates:</strong> New target date calculated</p>
+          <p style="margin-top: 6px;"><strong>6. Daily email:</strong> "Your plan for today: videos 1–5. Progress: 0/5"
+          </p>
+          <p style="margin-top: 6px;"><strong>7. Completion bonus:</strong> Extra XP if user finishes day on time</p>
+        </div>
+      </div>
+
+      <div class="card" style="--accent: #f59e0b;">
+        <div class="card-title">Database schema</div>
+        <div class="code-block">
+          /users/{uid}/schedules/{scheduleId} {
+          courseId: string
+          goalDueDate: timestamp
+          videosPerDay: number
+          createdAt: timestamp
+          }
+
+          /users/{uid}/schedules/{scheduleId}/days/{date} {
+          date: string // "2026-05-01"
+          videoIds: string[] // which videos to do today
+          completed: string[] // which ones user finished
+          targetCount: number // 8 (expected to do)
+          }</div>
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature-left">
+        <p style="font-size: 14px; color: #9d9ab0; margin-bottom: 12px;"><strong>UI Layout Idea:</strong></p>
+        <div class="demo-box">
+          <div
+            style="font-family: 'Press Start 2P'; font-size: 8px; color: #a78bfa; letter-spacing: 2px; margin-bottom: 10px;">
+            LEARNING SCHEDULE</div>
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 12px; color: #e8e6f0; margin-bottom: 6px;"><strong>NeetCode 250</strong></div>
+            <div style="font-size: 11px; color: #7c3aed;">Finish by: June 30 (59 days left)</div>
+            <div style="font-size: 11px; color: #9d9ab0;">Target: 5 videos/day</div>
+          </div>
+          <div style="background: #1a1a2e; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;">
+              <div
+                style="background: #7c3aed; padding: 4px; text-align: center; font-size: 10px; color: #fff; border-radius: 2px;">
+                <strong>Mon</strong><br>5/5</div>
+              <div
+                style="background: #3b0764; padding: 4px; text-align: center; font-size: 10px; color: #fff; border-radius: 2px;">
+                <strong>Tue</strong><br>3/5</div>
+              <div
+                style="background: #2a2a40; padding: 4px; text-align: center; font-size: 10px; color: #9d9ab0; border-radius: 2px;">
+                <strong>Wed</strong><br>0/5</div>
+              <div
+                style="background: #2a2a40; padding: 4px; text-align: center; font-size: 10px; color: #9d9ab0; border-radius: 2px;">
+                <strong>Thu</strong><br>0/5</div>
+              <div
+                style="background: #2a2a40; padding: 4px; text-align: center; font-size: 10px; color: #9d9ab0; border-radius: 2px;">
+                <strong>Fri</strong><br>0/5</div>
+              <div
+                style="background: #2a2a40; padding: 4px; text-align: center; font-size: 10px; color: #9d9ab0; border-radius: 2px;">
+                <strong>Sat</strong><br>0/5</div>
+              <div
+                style="background: #2a2a40; padding: 4px; text-align: center; font-size: 10px; color: #9d9ab0; border-radius: 2px;">
+                <strong>Sun</strong><br>0/5</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: #34d399;">📧 Daily email reminder sent</div>
+        </div>
+      </div>
+
+      <div class="feature-right">
+        <p style="font-size: 14px; color: #9d9ab0; margin-bottom: 12px;"><strong>Implementation priorities:</strong></p>
+        <div class="comparison">
+          <div class="comp-item bad">❌ Drag-drop to rearrange (complex, skip for v1)</div>
+          <div class="comp-item good">✅ Simple "edit plan" button to change videos/day</div>
+          <div class="comp-item bad">❌ Collaborative schedules (multi-user complexity)</div>
+          <div class="comp-item good">✅ Personal schedule only (focus)</div>
+          <div class="comp-item bad">❌ Advanced analytics (skip for now)</div>
+          <div class="comp-item good">✅ Simple progress bar per day</div>
+          <div class="comp-item good">✅ Email reminders (high value, low cost)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEGRATION SUMMARY -->
+  <div class="section">
+    <div class="sec-label">How These 3 Features Work Together</div>
+
+    <div class="grid">
+      <div class="card" style="--accent: #7c3aed;">
+        <div class="card-title">The Flow</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #7c3aed;"></span>User imports NeetCode playlist</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>System fetches transcripts → AI summarizes all
+            videos (cached)</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>User sees list: "Video 1: Two Sum. Summary: Find
+            two numbers that add up to target."</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>User clicks "Schedule this course" → sets goal
+            date</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>Calendar auto-fills with daily targets</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>User watches Video 1 → takes notes → marks
+            complete</li>
+          <li><span class="bullet" style="background: #7c3aed;"></span>Calendar updates to show progress</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #34d399;">
+        <div class="card-title">Tech dependencies</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #34d399;"></span>All 3 features share Gemini API calls</li>
+          <li><span class="bullet" style="background: #34d399;"></span>All 3 store data in Firestore</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Transcripts cached to avoid re-fetching</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Resend for email reminders (3000/mo free)</li>
+          <li><span class="bullet" style="background: #34d399;"></span>Total cost at 1000 users: ~$5–10/month (mostly
+            Firestore reads)</li>
+        </ul>
+      </div>
+
+      <div class="card" style="--accent: #38bdf8;">
+        <div class="card-title">Why this wins</div>
+        <ul class="items">
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>No competitor does this combo:</strong>
+            Notes + summaries + scheduling together</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>Sticky product:</strong> User plans a
+            course → comes back daily to check schedule</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>Completion engine:</strong> Schedule
+            creates accountability, drives finishes</li>
+          <li><span class="bullet" style="background: #38bdf8;"></span><strong>Moat:</strong> User data (notes +
+            schedule history) makes switching hard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
